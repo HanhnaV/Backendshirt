@@ -1,10 +1,12 @@
 ﻿using BusinessObjects.Cart;
 using BusinessObjects.Common;
+using BusinessObjects.Coupons;
 using BusinessObjects.CustomDesigns;
 using BusinessObjects.Entities.AI;
-using BusinessObjects.Entities.Orders;
+using BusinessObjects.Orders;
 using BusinessObjects.Products;
 using BusinessObjects.Reviews;
+using BusinessObjects.Wishlists;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,11 +24,7 @@ namespace BusinessObjects.Identity
         [NotMapped]
         public string FullName => $"{LastName} {FirstName}".Trim();
 
-        public string Address { get; set; } = string.Empty;
-
         public Gender Gender { get; set; }
-        public bool IsFirstLogin { get; set; } = true;
-
         // Audit fields
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public Guid CreatedBy { get; set; }
@@ -43,5 +41,8 @@ namespace BusinessObjects.Identity
         public virtual ICollection<Order> AssignedOrders { get; set; } = new List<Order>();
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
         public virtual ICollection<AiRecommendation> AiRecommendations { get; set; } = new List<AiRecommendation>();
+        public virtual ICollection<WishlistItem> WishlistItems { get; set; } = new List<WishlistItem>();
+        public virtual ICollection<UserAddress> UserAddresses { get; set; } = new List<UserAddress>();
+        public virtual ICollection<UserCoupon> UserCoupons { get; set; } = new List<UserCoupon>();
     }
 }

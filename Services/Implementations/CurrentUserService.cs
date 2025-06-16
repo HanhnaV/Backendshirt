@@ -28,5 +28,14 @@ namespace Services.Implementations
             // Giả sử role admin có tên "ADMIN"
             return _httpContextAccessor.HttpContext?.User?.IsInRole("ADMIN") ?? false;
         }
+        public bool CanManageProducts()
+        {
+            return IsAdmin() || _httpContextAccessor.HttpContext?.User?.IsInRole("PRODUCT_MANAGER") == true;
+        }
+
+        public bool CanProcessOrders()
+        {
+            return IsAdmin() || _httpContextAccessor.HttpContext?.User?.IsInRole("ORDER_PROCESSOR") == true;
+        }
     }
 }

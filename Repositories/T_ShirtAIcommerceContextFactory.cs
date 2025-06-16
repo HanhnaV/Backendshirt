@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
@@ -37,7 +38,8 @@ namespace Repositories
                 sql => sql.MigrationsAssembly("Repositories")
             );
 
-            return new T_ShirtAIcommerceContext(optionsBuilder.Options);
+            // 5. ✅ Pass null - DbContext sẽ handle null HttpContextAccessor
+            return new T_ShirtAIcommerceContext(optionsBuilder.Options, null!);
         }
 
         private string FindWebApiProjectPath()

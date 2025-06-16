@@ -1,5 +1,4 @@
 ﻿using BusinessObjects.CustomDesigns;
-using BusinessObjects.Entities.Orders;
 using BusinessObjects.Products;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +16,7 @@ namespace BusinessObjects.Orders
 
         public Guid? ProductId { get; set; }
         public Guid? CustomDesignId { get; set; }
+        public Guid? ProductVariantId { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -48,5 +48,7 @@ namespace BusinessObjects.Orders
 
         [ForeignKey("CustomDesignId")]
         public virtual CustomDesign? CustomDesign { get; set; }
+        [ForeignKey("ProductVariantId")]
+        public virtual ProductVariant? ProductVariant { get; set; }
     }
 }

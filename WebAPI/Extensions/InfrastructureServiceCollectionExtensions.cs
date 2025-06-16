@@ -13,7 +13,6 @@ using Services.Interfaces;
 using System.Security.Claims;
 using System.Text;
 
-
 namespace WebAPI.Extensions
 {
     public static class InfrastructureServiceCollectionExtensions
@@ -23,12 +22,14 @@ namespace WebAPI.Extensions
             // 1. Cấu hình Settings
             services.Configure<DTOs.UserDTOs.Identities.JwtSettings>(configuration.GetSection("JwtSettings"));
             //services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+            services.AddHttpContextAccessor();
 
             // 2. DbContext và CORS
             services.AddDbContext<T_ShirtAIcommerceContext>(opt =>
                 opt.UseSqlServer(
                     configuration.GetConnectionString("T_ShirtAIcommerceContext"),
                     sql => sql.MigrationsAssembly("Repositories")));
+
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", b => b
@@ -102,10 +103,10 @@ namespace WebAPI.Extensions
             services.AddScoped<ICurrentTime, CurrentTime>();
             services.AddScoped<IRepositoryFactory, RepositoryFactory>();
 
+            // Business Services - đặt sau khi đã có HttpContextAccessor
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<ITokenService, TokenService>();
             //services.AddScoped<IUserService, UserService>();
-          
 
             // 5. Email + Quartz
             //services.AddEmailServices(options =>

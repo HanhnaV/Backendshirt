@@ -18,6 +18,7 @@ namespace BusinessObjects.Cart
 
         public Guid? ProductId { get; set; }
         public Guid? CustomDesignId { get; set; }
+        public Guid? ProductVariantId { get; set; }
 
         [MaxLength(50)]
         public string? SelectedColor { get; set; }
@@ -25,14 +26,20 @@ namespace BusinessObjects.Cart
         [MaxLength(20)]
         public string? SelectedSize { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Số lượng là bắt buộc")]
+        [Range(1, 100, ErrorMessage = "Số lượng từ 1-100")]
         public int Quantity { get; set; } = 1;
 
-        [Required]
+        [Required(ErrorMessage = "Đơn giá là bắt buộc")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Đơn giá phải lớn hơn 0")]
         [Column(TypeName = "decimal(12,2)")]
         public decimal UnitPrice { get; set; }
 
+        [Column(TypeName = "decimal(12,2)")]
+        public decimal TotalPrice => UnitPrice * Quantity;
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
         [ForeignKey("UserId")]
@@ -43,5 +50,8 @@ namespace BusinessObjects.Cart
 
         [ForeignKey("CustomDesignId")]
         public virtual CustomDesign? CustomDesign { get; set; }
+
+        [ForeignKey("ProductVariantId")]
+        public virtual ProductVariant? ProductVariant { get; set; }
     }
 }
