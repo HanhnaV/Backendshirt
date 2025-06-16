@@ -12,6 +12,7 @@ using Services.Implementations;
 using Services.Interfaces;
 using System.Security.Claims;
 using System.Text;
+using Services.Commons.Gmail.Implementations;
 
 namespace WebAPI.Extensions
 {
@@ -109,11 +110,7 @@ namespace WebAPI.Extensions
             //services.AddScoped<IUserService, UserService>();
 
             // 5. Email + Quartz
-            services.AddEmailServices(options =>
-            {
-                configuration.GetSection("EmailSettings").Bind(options);
-                options.SchoolName = "Trường Tiểu học Lê Văn Việt";
-            });
+            services.AddEmailServices(configuration.GetSection("EmailSettings"));
 
             // 6. Controllers
             services.AddControllers();

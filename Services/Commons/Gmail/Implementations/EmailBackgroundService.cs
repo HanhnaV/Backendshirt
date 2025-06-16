@@ -40,10 +40,7 @@ namespace Services.Commons.Gmail.Implementations
 
                     try
                     {
-                        await emailService.SendEmailAsync(
-                            emailRequest.To,
-                            emailRequest.Subject,
-                            emailRequest.Body);
+                        await emailService.SendEmailAsync(emailRequest);
 
                         _logger.LogInformation($"Email sent to {string.Join(", ", emailRequest.To)}");
                     }

@@ -11,18 +11,15 @@ namespace Services.Commons.Gmail.Implementations
         public void EnqueueEmail(EmailRequest emailRequest)
         {
             if (emailRequest == null)
-            {
                 throw new ArgumentNullException(nameof(emailRequest));
-            }
 
             _emailRequests.Enqueue(emailRequest);
             _signal.Release();
         }
 
-        public async Task<EmailRequest> DequeueEmailAsync(CancellationToken cancellationToken)
+        public async Task<EmailRequest?> DequeueEmailAsync(CancellationToken cancellationToken)
         {
             await _signal.WaitAsync(cancellationToken);
-
             _emailRequests.TryDequeue(out var emailRequest);
             return emailRequest;
         }

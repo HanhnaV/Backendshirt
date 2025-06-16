@@ -1,13 +1,11 @@
 ﻿using DTOs.UserDTOs.Request;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NETCore.MailKit.Core;
-using Services.Commons.Gmail.Implementations;
-using Services.Interfaces;
+using Services.Commons.Gmail.Interfaces;
 using System.Net;
 using System.Net.Mail;
 
-namespace Services.Implementations
+namespace Services.Commons.Gmail.Implementations
 {
     public class EmailService : IEmailService
     {
@@ -160,20 +158,23 @@ namespace Services.Implementations
 
         public async Task<List<EmailRequest>> GetPendingEmailsAsync()
         {
-            // Implement logic to get pending emails from database
+            // TODO: Implement logic to get pending emails from database
             // This is a placeholder implementation
+            _logger.LogWarning("GetPendingEmailsAsync not implemented - returning empty list");
             return new List<EmailRequest>();
         }
 
         public async Task<bool> MarkEmailAsSentAsync(Guid emailId)
         {
-            // Implement logic to mark email as sent in database
+            // TODO: Implement logic to mark email as sent in database
+            _logger.LogWarning($"MarkEmailAsSentAsync not implemented for email ID: {emailId}");
             return true;
         }
 
         public async Task<bool> RetryFailedEmailAsync(Guid emailId)
         {
-            // Implement logic to retry failed email
+            // TODO: Implement logic to retry failed email
+            _logger.LogWarning($"RetryFailedEmailAsync not implemented for email ID: {emailId}");
             return true;
         }
 
