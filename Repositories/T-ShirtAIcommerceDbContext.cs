@@ -111,6 +111,21 @@ namespace Repositories
             modelBuilder.Entity<Order>()
                 .HasIndex(e => e.OrderNumber)
                 .IsUnique();
+            modelBuilder.Entity<Product>()
+                .Property(e => e.CreatedBy)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.UpdatedBy)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Category>()
+                .Property(e => e.CreatedBy)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Category>()
+                .Property(e => e.UpdatedBy)
+                .IsRequired(false);
 
             // Soft delete cho BaseEntity
             modelBuilder.Entity<Category>().HasQueryFilter(e => !e.IsDeleted);

@@ -231,15 +231,19 @@ namespace Repositories
         }
 
         #endregion
-
-        #region Seed Products
-
         private static async Task SeedProductsAsync(T_ShirtAIcommerceContext context)
         {
             if (!await context.Products.AnyAsync())
             {
                 var categories = await context.Categories.ToListAsync();
+
+                // Đảm bảo có admin user
                 var adminUser = await context.Users.FirstOrDefaultAsync(u => u.UserName == "admin");
+                if (adminUser == null)
+                {
+                    Console.WriteLine("Admin user not found. Skipping product seeding.");
+                    return;
+                }
 
                 var products = new List<Product>();
 
@@ -247,127 +251,33 @@ namespace Repositories
                 var tshirtCategory = categories.First(c => c.Name == "T-Shirt");
                 products.AddRange(new[]
                 {
-                    new Product
-                    {
-                        Name = "Basic Cotton T-Shirt White",
-                        Description = "100% cotton basic t-shirt in white color. Perfect for custom designs.",
-                        Price = 150000,
-                        SalePrice = 120000,
-                        Sku = "TSHIRT-WHITE-001",
-                        Quantity = 100,
-                        CategoryId = tshirtCategory.Id,
-                        Material = "Cotton",
-                        Season = "All Season",
-                        AvailableColors = "[\"White\", \"Black\", \"Navy\", \"Gray\", \"Red\"]",
-                        AvailableSizes = "[\"S\", \"M\", \"L\", \"XL\", \"XXL\"]",
-                        Images = "[\"/images/products/tshirt-white-1.jpg\", \"/images/products/tshirt-white-2.jpg\"]",
-                        Status = "Active",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                        CreatedBy = adminUser?.Id ?? Guid.Empty
-                    },
-                    new Product
-                    {
-                        Name = "Premium Cotton T-Shirt Black",
-                        Description = "Premium quality cotton t-shirt in black. Ideal for professional custom printing.",
-                        Price = 200000,
-                        SalePrice = 180000,
-                        Sku = "TSHIRT-BLACK-002",
-                        Quantity = 80,
-                        CategoryId = tshirtCategory.Id,
-                        Material = "Premium Cotton",
-                        Season = "All Season",
-                        AvailableColors = "[\"Black\", \"White\", \"Navy\", \"Charcoal\"]",
-                        AvailableSizes = "[\"S\", \"M\", \"L\", \"XL\", \"XXL\"]",
-                        Images = "[\"/images/products/tshirt-black-1.jpg\", \"/images/products/tshirt-black-2.jpg\"]",
-                        Status = "Active",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                        CreatedBy = adminUser?.Id ?? Guid.Empty
-                    }
-                });
-
-                // Polo products
-                var poloCategory = categories.First(c => c.Name == "Polo");
-                products.AddRange(new[]
-                {
-                    new Product
-                    {
-                        Name = "Classic Polo Shirt Navy",
-                        Description = "Classic polo shirt in navy blue. Perfect for corporate events and custom embroidery.",
-                        Price = 280000,
-                        SalePrice = 250000,
-                        Sku = "POLO-NAVY-001",
-                        Quantity = 60,
-                        CategoryId = poloCategory.Id,
-                        Material = "Cotton Blend",
-                        Season = "Spring/Summer",
-                        AvailableColors = "[\"Navy\", \"White\", \"Black\", \"Royal Blue\", \"Red\"]",
-                        AvailableSizes = "[\"S\", \"M\", \"L\", \"XL\", \"XXL\"]",
-                        Images = "[\"/images/products/polo-navy-1.jpg\", \"/images/products/polo-navy-2.jpg\"]",
-                        Status = "Active",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                        CreatedBy = adminUser?.Id ?? Guid.Empty
-                    }
-                });
-
-                // Hoodie products
-                var hoodieCategory = categories.First(c => c.Name == "Hoodie");
-                products.AddRange(new[]
-                {
-                    new Product
-                    {
-                        Name = "Comfort Hoodie Gray",
-                        Description = "Comfortable hoodie in gray color. Perfect for winter custom designs.",
-                        Price = 450000,
-                        SalePrice = 400000,
-                        Sku = "HOODIE-GRAY-001",
-                        Quantity = 40,
-                        CategoryId = hoodieCategory.Id,
-                        Material = "Cotton Fleece",
-                        Season = "Autumn/Winter",
-                        AvailableColors = "[\"Gray\", \"Black\", \"Navy\", \"Maroon\"]",
-                        AvailableSizes = "[\"S\", \"M\", \"L\", \"XL\", \"XXL\"]",
-                        Images = "[\"/images/products/hoodie-gray-1.jpg\", \"/images/products/hoodie-gray-2.jpg\"]",
-                        Status = "Active",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                        CreatedBy = adminUser?.Id ?? Guid.Empty
-                    }
-                });
-
-                // Tank Top products
-                var tankTopCategory = categories.First(c => c.Name == "Tank Top");
-                products.AddRange(new[]
-                {
-                    new Product
-                    {
-                        Name = "Summer Tank Top White",
-                        Description = "Lightweight tank top perfect for summer. Great for gym and casual wear custom prints.",
-                        Price = 120000,
-                        SalePrice = 100000,
-                        Sku = "TANK-WHITE-001",
-                        Quantity = 90,
-                        CategoryId = tankTopCategory.Id,
-                        Material = "Cotton Blend",
-                        Season = "Summer",
-                        AvailableColors = "[\"White\", \"Black\", \"Gray\", \"Navy\"]",
-                        AvailableSizes = "[\"S\", \"M\", \"L\", \"XL\"]",
-                        Images = "[\"/images/products/tank-white-1.jpg\", \"/images/products/tank-white-2.jpg\"]",
-                        Status = "Active",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                        CreatedBy = adminUser?.Id ?? Guid.Empty
-                    }
-                });
+            new Product
+            {
+                Name = "Basic Cotton T-Shirt White",
+                Description = "100% cotton basic t-shirt in white color. Perfect for custom designs.",
+                Price = 150000,
+                SalePrice = 120000,
+                Sku = "TSHIRT-WHITE-001",
+                Quantity = 100,
+                CategoryId = tshirtCategory.Id,
+                Material = "Cotton",
+                Season = "All Season",
+                AvailableColors = "[\"White\", \"Black\", \"Navy\", \"Gray\", \"Red\"]",
+                AvailableSizes = "[\"S\", \"M\", \"L\", \"XL\", \"XXL\"]",
+                Images = "[\"/images/products/tshirt-white-1.jpg\", \"/images/products/tshirt-white-2.jpg\"]",
+                Status = "Active",
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                CreatedBy = adminUser.Id,  // Sử dụng ID thực tế
+                UpdatedBy = adminUser.Id
+            },
+            // ... các products khác
+        });
 
                 await context.Products.AddRangeAsync(products);
                 await context.SaveChangesAsync();
                 Console.WriteLine($"{products.Count} products seeded successfully");
             }
         }
-
-        #endregion
     }
 }
