@@ -1,25 +1,22 @@
+﻿
+using WebAPI.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// 1) Đăng ký toàn bộ hạ tầng + controllers
+builder.Services
+      .AddInfrastructure(builder.Configuration)
+      .AddSwaggerServices()
+      .AddCustomServices();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+// 2) Áp dụng pipeline (migrations, routing, auth, map controllers…) và swagger
+var applicationBuilder = await app.UseApplicationPipeline();
+applicationBuilder.UseSwaggerPipeline();
 
 app.Run();
