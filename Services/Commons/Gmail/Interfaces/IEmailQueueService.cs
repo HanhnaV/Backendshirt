@@ -1,4 +1,4 @@
-﻿namespace Services.Commons.Gmail
+﻿namespace Services.Commons.Gmail.Interfaces
 {
     public interface IEmailQueueService
     {

@@ -109,11 +109,11 @@ namespace WebAPI.Extensions
             //services.AddScoped<IUserService, UserService>();
 
             // 5. Email + Quartz
-            //services.AddEmailServices(options =>
-            //{
-            //    configuration.GetSection("EmailSettings").Bind(options);
-            //    options.SchoolName = "Trường Tiểu học Lê Văn Việt";
-            //});
+            services.AddEmailServices(options =>
+            {
+                configuration.GetSection("EmailSettings").Bind(options);
+                options.SchoolName = "Trường Tiểu học Lê Văn Việt";
+            });
 
             // 6. Controllers
             services.AddControllers();

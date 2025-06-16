@@ -1,7 +1,8 @@
 ﻿using DTOs.UserDTOs.Request;
 using Microsoft.Extensions.Logging;
+using Services.Commons.Gmail.Interfaces;
 
-namespace Services.Commons.Gmail
+namespace Services.Commons.Gmail.Implementations
 {
     public class EmailQueueService : IEmailQueueService
     {

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Services.Commons.Gmail.Interfaces;
 
-namespace Services.Commons.Gmail
+namespace Services.Commons.Gmail.Implementations
 {
     public class EmailBackgroundService : BackgroundService
     {

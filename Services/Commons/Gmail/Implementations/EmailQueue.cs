@@ -1,7 +1,7 @@
 ﻿using DTOs.UserDTOs.Request;
 using System.Collections.Concurrent;
 
-namespace Services.Commons.Gmail
+namespace Services.Commons.Gmail.Implementations
 {
     public class EmailQueue
     {

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Quartz;
+using Services.Commons.Gmail.Interfaces;
 
-namespace Services.Commons.Gmail
+namespace Services.Commons.Gmail.Implementations
 {
     public class SendEmailJob : IJob
     {

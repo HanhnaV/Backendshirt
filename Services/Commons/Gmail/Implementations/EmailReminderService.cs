@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Quartz;
 
-namespace Services.Commons.Gmail
+namespace Services.Commons.Gmail.Implementations
 {
     public class EmailReminderService : IHostedService
     {
