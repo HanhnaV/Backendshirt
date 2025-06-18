@@ -1,5 +1,4 @@
-﻿namespace UserDTOs.DTOs.Response
-{
-    public record LoginResponse(string Token = null!);
+namespace DTOs.UserDTOs.Response;
 
-}
+public record LoginResponse(string Token = null!);
+

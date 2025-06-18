@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>WebAPI</RootNamespace>
     <UserSecretsId>1b791acd-7051-4c9c-93d3-be084c7bc7e5</UserSecretsId>
   </PropertyGroup>
 
