@@ -9,7 +9,7 @@ namespace Repositories
     {
         public T_ShirtAIcommerceContext CreateDbContext(string[] args)
         {
-            // 1. Tìm đường dẫn đến project WebAPI (chứa appsettings.json)
+            // 1. Tìm đường dẫn đến project TShirtAI.API (chứa appsettings.json)
             var basePath = FindWebApiProjectPath();
 
             // 2. Build configuration
@@ -47,7 +47,7 @@ namespace Repositories
             var currentDirectory = Directory.GetCurrentDirectory();
             var directory = new DirectoryInfo(currentDirectory);
 
-            // Tìm thư mục chứa appsettings.json (thường là WebAPI project)
+            // Tìm thư mục chứa appsettings.json (thường là TShirtAI.API project)
             while (directory != null)
             {
                 var appsettingsPath = Path.Combine(directory.FullName, "appsettings.json");
@@ -57,15 +57,15 @@ namespace Repositories
                 }
 
                 // Tìm trong các thư mục con
-                var webApiDir = directory.GetDirectories()
-                    .FirstOrDefault(d => d.Name.Contains("WebAPI") || d.Name.Contains("API"));
+                var apiDir = directory.GetDirectories()
+                    .FirstOrDefault(d => d.Name.Contains("API"));
 
-                if (webApiDir != null)
+                if (apiDir != null)
                 {
-                    var webApiAppsettings = Path.Combine(webApiDir.FullName, "appsettings.json");
-                    if (File.Exists(webApiAppsettings))
+                    var apiAppsettings = Path.Combine(apiDir.FullName, "appsettings.json");
+                    if (File.Exists(apiAppsettings))
                     {
-                        return webApiDir.FullName;
+                        return apiDir.FullName;
                     }
                 }
 

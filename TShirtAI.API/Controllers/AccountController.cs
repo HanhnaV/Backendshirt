@@ -4,9 +4,9 @@ using DTOs.UserDTOs.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
-using WebAPI.Middlewares;
+using TShirtAI.API.Middlewares;
 
-namespace WebAPI.Controllers
+namespace TShirtAI.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

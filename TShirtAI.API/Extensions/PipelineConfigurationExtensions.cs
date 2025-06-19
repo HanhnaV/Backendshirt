@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
-using WebAPI.Middlewares;
+using TShirtAI.API.Middlewares;
 
-namespace WebAPI.Extensions
+namespace TShirtAI.API.Extensions
 {
     public static class PipelineConfigurationExtensions
     {

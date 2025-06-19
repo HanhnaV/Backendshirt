@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebAPI.Middlewares;
+using TShirtAI.API.Middlewares;
 
-namespace WebAPI.Extensions
+namespace TShirtAI.API.Extensions
 {
     public static class ServiceCollectionExtensions
     {

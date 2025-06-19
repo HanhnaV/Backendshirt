@@ -1,9 +1,9 @@
 using BusinessObjects.Shipping;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.WorkSeeds.Interfaces;
-using WebAPI.Middlewares;
+using TShirtAI.API.Middlewares;
 
-namespace WebAPI.Controllers
+namespace TShirtAI.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

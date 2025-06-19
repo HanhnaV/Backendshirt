@@ -1,5 +1,5 @@
 ﻿
-using WebAPI.Extensions;
+using TShirtAI.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace WebAPI.Middlewares
+namespace TShirtAI.API.Middlewares
 {
     public class ValidationMiddleware
     {

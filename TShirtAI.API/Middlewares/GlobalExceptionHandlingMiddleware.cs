@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
 
-namespace WebAPI.Middlewares
+namespace TShirtAI.API.Middlewares
 {
     public class GlobalExceptionHandlingMiddleware
     {

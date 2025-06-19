@@ -14,7 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using Services.Commons.Gmail.Implementations;
 
-namespace WebAPI.Extensions
+namespace TShirtAI.API.Extensions
 {
     public static class InfrastructureServiceCollectionExtensions
     {

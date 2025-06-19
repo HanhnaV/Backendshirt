@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
-namespace WebAPI.Extensions
+namespace TShirtAI.API.Extensions
 {
     public class SecurityStampValidationMiddleware
     {

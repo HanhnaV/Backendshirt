@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace WebAPI.Extensions
+namespace TShirtAI.API.Extensions
 {
     public static class SwaggerServiceExtensions
     {
